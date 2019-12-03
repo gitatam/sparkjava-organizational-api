@@ -37,6 +37,20 @@ public class Sql2oNewsDaoTest {
         assertNotEquals(originalNewsId, testNews.getId());
     }
 
+    @Test
+    public void getAll_addedNewsAreReturnedFromGetAll() throws Exception {
+        News testNews = newTestNews();
+        newsDao.add(testNews);
+
+        assertEquals(1, newsDao.getAll().size());
+    }
+
+    @Test
+    public void getAll_noNewsReturns0IfEmptyList() throws Exception {
+        assertEquals(0, newsDao.getAll().size());
+    }
+
+
 
     private News newTestNews() {
         return new News("Meeting", "There will be a meeting at 4PM", "General", 0);

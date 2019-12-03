@@ -35,7 +35,11 @@ public class Sql2oNewsDao implements NewsDao {
 
     @Override
     public List<News> getAll() {
-        return null;
+        try (Connection con = sql2o.open()) {
+            return con.createQuery("SELECT * FROM news")
+                    .addColumnMapping("department_id", "departmentId")
+                    .executeAndFetch(News.class);
+        }
     }
 
     @Override
@@ -50,6 +54,11 @@ public class Sql2oNewsDao implements NewsDao {
 
     @Override
     public void deleteAll() {
-
+        String sql = "DELETE from news";
+        try (Connection con = sql2o.open()) {
+            con.createQuery(sql).executeUpdate();
+        } catch (Sql2oException ex) {
+            System.out.println(ex);
+        }
     }
 }
