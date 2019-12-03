@@ -6,7 +6,7 @@ import static org.junit.Assert.*;
 
 public class UserTest {
     private final String expectedName = "Mathew Gitata";
-    private final String expectedPosition = "CTO";
+    private final String expectedDesignation = "CTO";
     private final String expectedRole = "Make all executive decisions with regards to the technological interests of xyz company";
     private final int expectedDepartmentId = 1;
 
@@ -27,7 +27,7 @@ public class UserTest {
     @Test
     public void getPosition_returnsCorrectPosition() {
         User user = createUser();
-        assertEquals(expectedPosition, user.getPosition());
+        assertEquals(expectedDesignation, user.getDesignation());
 
     }
 
@@ -46,7 +46,7 @@ public class UserTest {
     }
 
     private User createUser() {
-        return new User(expectedName, expectedPosition, expectedRole, expectedDepartmentId);
+        return new User(expectedName, expectedDesignation, expectedRole, expectedDepartmentId);
     }
 
 }
