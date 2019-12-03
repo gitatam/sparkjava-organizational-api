@@ -1,4 +1,3 @@
---SET MODE PostgreSQL;
 CREATE DATABASE org;
 \c org;
 
