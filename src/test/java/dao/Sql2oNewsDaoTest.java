@@ -1,5 +1,6 @@
 package dao;
 
+import exc.DaoException;
 import model.News;
 import org.junit.After;
 import org.junit.Before;
@@ -50,7 +51,38 @@ public class Sql2oNewsDaoTest {
         assertEquals(0, newsDao.getAll().size());
     }
 
+    @Test
+    public void getById_existingNewsCanBeFoundById() throws Exception {
+        News testNews = newTestNews();
+        newsDao.add(testNews);
 
+        News foundNews = newsDao.getById(testNews.getId());
+
+        assertEquals(testNews, foundNews);
+    }
+
+    @Test
+    public void deleteById_RemovesNewsArticleOfSpecifiedId() throws Exception {
+        News testNews = newTestNews();
+        newsDao.add(testNews);
+        News testNews2 = newTestNews();
+        newsDao.add(testNews2);
+
+        assertEquals(2, newsDao.getAll().size());
+        newsDao.deleteById(testNews.getId());
+        assertEquals(1, newsDao.getAll().size());
+    }
+
+    @Test
+    public void deleteAll_ReturnsZeroNewsArticles() throws DaoException {
+        News testNews = newTestNews();
+        newsDao.add(testNews);
+        News testNews2 = newTestNews();
+        newsDao.add(testNews2);
+
+        newsDao.deleteAll();
+        assertEquals(0, newsDao.getAll().size());
+    }
 
     private News newTestNews() {
         return new News("Meeting", "There will be a meeting at 4PM", "General", 0);
