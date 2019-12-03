@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS users(
  id SERIAL PRIMARY KEY,
 name VARCHAR,
 designation VARCHAR,
-role vARCHAR,
+role VARCHAR,
 department_id int
 );
 

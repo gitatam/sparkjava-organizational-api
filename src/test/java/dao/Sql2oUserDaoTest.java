@@ -29,8 +29,6 @@ public class Sql2oUserDaoTest {
         conn.close();
     }
 
-
-
     @Test
     public void add_addingUserSetsId() throws Exception {
         User testUser = newTestUser();
@@ -85,9 +83,6 @@ public class Sql2oUserDaoTest {
         userDao.deleteAll();
         assertEquals(0, userDao.getAll().size());
     }
-
-
-
 
     private User newTestUser() {
         return new User ("Mathew Gitata","CTO","Make all executive decisions with regards to the technological interests of xyz company",1);

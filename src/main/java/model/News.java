@@ -53,4 +53,26 @@ public class News {
     public void setDepartmentId(int departmentId) {
         this.departmentId = departmentId;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        News news = (News) o;
+
+        if (departmentId != news.departmentId) return false;
+        if (!title.equals(news.title)) return false;
+        if (!content.equals(news.content)) return false;
+        return author.equals(news.author);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = title.hashCode();
+        result = 31 * result + content.hashCode();
+        result = 31 * result + author.hashCode();
+        result = 31 * result + departmentId;
+        return result;
+    }
 }

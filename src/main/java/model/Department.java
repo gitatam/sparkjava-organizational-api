@@ -43,4 +43,24 @@ public class Department {
     public void setEmployeeCount(int employeeCount) {
         this.employeeCount = employeeCount;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Department that = (Department) o;
+
+        if (employeeCount != that.employeeCount) return false;
+        if (!deptName.equals(that.deptName)) return false;
+        return deptDescription.equals(that.deptDescription);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = deptName.hashCode();
+        result = 31 * result + deptDescription.hashCode();
+        result = 31 * result + employeeCount;
+        return result;
+    }
 }
