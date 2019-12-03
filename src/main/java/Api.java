@@ -1,6 +1,8 @@
 import com.google.gson.Gson;
 import dao.*;
 import exc.ApiErrorException;
+import model.Department;
+import model.News;
 import model.User;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
@@ -23,7 +25,7 @@ public class Api {
         NewsDao newsDao = new Sql2oNewsDao(sql2o);
 
         //CREATE new user
-        post("/users", "application/json", (req, res) -> {
+        post("/users/new-user", "application/json", (req, res) -> {
             User user = gson.fromJson(req.body(), User.class);
             userDao.add(user);
             res.status(201);
@@ -44,7 +46,51 @@ public class Api {
             return user;
         }, gson::toJson);
 
+        //CREATE new department
+        post("/departments/new-department", "application/json", (req, res) -> {
+            Department department = gson.fromJson(req.body(), Department.class);
+            departmentDao.add(department);
+            res.status(201);// update the response status code
+            return gson.toJson(department);
+        }, gson::toJson);
 
+        //READ show departments
+        get("/departments", "application/json",
+                (req, res) -> departmentDao.getAll(), gson::toJson);
+
+        //READ show departments by given id
+        get("/departments/:id", "application/json", (req, res) -> {
+            int id = Integer.parseInt(req.params("id"));
+            Department department = departmentDao.getById(id);
+            if (department == null) {
+                throw new ApiErrorException(404, "Could not find department with id " + id);
+            }
+            return department;
+        });
+
+        //CREATE new news entry
+        post("/news/new-news", "application/json", (req, res) -> {
+            News news = gson.fromJson(req.body(), News.class);
+            newsDao.add(news);
+            res.status(201);
+            return gson.toJson(news);
+        });
+
+        //READ all the news
+        get("/news", "application/json",
+                (req, res) -> newsDao.getAll(), gson::toJson);
+
+        //READ show specific news
+        get("/news/:id", "application/json", (req, res) -> {
+            int id = Integer.parseInt(req.params("id"));
+            News news = newsDao.getById(id);
+            if (news == null) {
+                throw new ApiErrorException(404, "Could not find news article with id " + id);
+            }
+            return news;
+        }, gson::toJson);
+
+        //exception handler
         exception(ApiErrorException.class, (exc, req, res) -> {
             ApiErrorException err = (ApiErrorException) exc;
             Map<String, Object> jsonMap = new HashMap<>();
