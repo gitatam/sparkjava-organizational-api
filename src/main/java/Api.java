@@ -26,5 +26,9 @@ public class Api {
             return user;
         }, gson::toJson);
 
+        //READ show users
+        get("/users", "application/json",
+                (req, res) -> userDao.getAll(), gson::toJson);
+
     }
 }
