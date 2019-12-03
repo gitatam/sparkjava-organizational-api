@@ -66,7 +66,7 @@ public class Api {
                 throw new ApiErrorException(404, "Could not find department with id " + id);
             }
             return department;
-        });
+        }, gson::toJson);
 
         //CREATE new news entry
         post("/news/new-news", "application/json", (req, res) -> {
@@ -89,6 +89,11 @@ public class Api {
             }
             return news;
         }, gson::toJson);
+
+        //TODO: READ employees of a given department
+
+        //TODO: READ news of a given department
+
 
         //exception handler
         exception(ApiErrorException.class, (exc, req, res) -> {
