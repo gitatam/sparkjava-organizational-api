@@ -30,6 +30,17 @@ Run the following commands to confirm installations above
 `$ gradle --version`     //gradle version`
 
 
+### Endpoints
+|Method 	           |    Endpoint 	                 |      Description          |
+|----------------------------------------------|:-----------------------------------:|-----------------------------:|
+|POST|/new-user"|Create a new user
+|GET|/users| See all users
+|GET|/users/1| See use with given index
+|POST|departments/new-department | Create a new department
+|GET|/departments|List all departments
+|GET|/departments/:id| Fetch specific departments
+|GET|/news| All news articles
+|GET|/news/2|Specific department's news
 
 ### Setup Instructions
 
