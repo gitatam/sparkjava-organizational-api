@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/gitatam/sparkjava-organizational-api.svg?style=svg)](https://circleci.com/gh/gitatam/sparkjava-organizational-api)
+
 # ORGANIZATIONAL NEWS API
 
 A rest REST API for querying and retrieving scoped news and information.
